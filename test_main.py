@@ -28,6 +28,23 @@ def test_stats():
     assert describe_test is not None
 
 
+def save_to_md(df):
+    """save summary report to markdown"""
+    describe_df = summary(df)
+    markdown_table1 = describe_df.to_markdown()
+    # Write the markdown table to a file
+    with open("summary_statistics.md", "w", encoding="utf-8") as file:
+        file.write("Describe:\n")
+        file.write(markdown_table1)
+        file.write("\n\n")  # Add a new line
+        file.write("![congress_viz](Horsepower_histogram.png)\n")
+        file.write("\n\n")  # Add a new line
+        file.write("![congress_viz2](Visualization_of_EngineSize_&_MPG_Highway.png)\n")
+        file.write("\n\n")  # Add a new line
+        file.write("![congress_viz3](correlation_matrix.png)\n")
+
+
 if __name__ == "__main__":
     test_get_data()
     test_stats()
+    save_to_md()
