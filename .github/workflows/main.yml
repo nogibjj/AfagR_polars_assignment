@@ -1,16 +1,21 @@
-name: Install
-
+name: CI
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #vm that GH actions will run on
     steps:
       - uses: actions/checkout@v3
       - name: install packages
         run: make install
+      - name: lint
+        run: make lint
+      - name: test
+        run: make test
+      - name: format
+        run: make format
